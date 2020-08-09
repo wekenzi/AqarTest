@@ -6,11 +6,12 @@
     </nav>
 </div>
 <!-- Main Contetn -->
-<div class="main_content">
+<app-loader *ngIf="loading"></app-loader>
+<div class="main_content" *ngIf="!loading">
     <h1>Papa Jhon`s, by islam gad</h1>
     <hr>
     <!-- Orders Table-->
-    <div class="p-4">
+    <div class="container">
         <table class="table table-light">
             <thead>
               <tr>
@@ -21,9 +22,13 @@
             </thead>
             <tbody>
               <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>Smoky Pizza - small</td>
+                <td>66 EGP</td>
+                <td class="table_options">
+                  <button class="minus" (click)="reduceQuantity()">-</button>
+                  <input type="number" value="1" readonly>
+                  <button class="plus" (click)="increaseQuantity()">+</button>
+                </td>
               </tr>
             </tbody>
         </table>

@@ -7,8 +7,9 @@ import { ApiService } from "src/app/services/api.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   constructor(private apiService:ApiService) { }
+
+  loading:boolean = false;
 
   ngOnInit(): void {
     this.getOrdersFromApi();
@@ -19,6 +20,14 @@ export class HomeComponent implements OnInit {
     .subscribe(data=>{
       console.log(data);
     })
+  }
+
+  increaseQuantity(){
+
+  }
+
+  reduceQuantity(){
+    
   }
 
 }

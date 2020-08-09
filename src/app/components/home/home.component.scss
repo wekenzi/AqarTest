@@ -6,4 +6,30 @@
     hr{
         border-top: 2px solid rgba(0,0,0,.1);
     }
+    .table_options{
+        display: flex;
+        button{
+            font-size: 23px;
+            color: #fff;
+            background-color: #74c0e2;
+            padding: 0px 15px 4px 15px;
+            border: none;
+            outline: none;
+        }
+        input{
+            max-width: 60px;
+            text-align: center;
+            margin: 0px 5px;
+            border: 2px solid #d8dde3;
+            outline: none;
+        }
+        .plus{
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .minus{
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+    }
 }
