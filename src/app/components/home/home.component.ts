@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from "src/app/services/api.service";
+import { Order } from "src/app/models/order";
+import { FullData } from "src/app/models/full-data";
 
 @Component({
   selector: 'app-home',
@@ -9,25 +11,43 @@ import { ApiService } from "src/app/services/api.service";
 export class HomeComponent implements OnInit {
   constructor(private apiService:ApiService) { }
 
-  loading:boolean = false;
+  loading:boolean = true;
+  orders:Order[] = [];
+  casherName:string;
+  resturantTitle:string;
 
   ngOnInit(): void {
-    this.getOrdersFromApi();
+    this.apiService.getFullData()
+    .subscribe(data=>{
+      this.casherName = data.user.name;
+      this.resturantTitle = data.restaurant.title;
+      this.orders = data.order_items;
+      this.loading = false;
+    })
   }
 
   getOrdersFromApi(){
     this.apiService.getOrders()
     .subscribe(data=>{
-      console.log(data);
+      this.orders = data;
+      this.loading = false;
     })
   }
 
-  increaseQuantity(){
-
+  increaseQuantity(id){
+    this.loading = true;
+    this.apiService.increment(id,{})
+    .subscribe(data=>{
+      this.getOrdersFromApi();
+    })
   }
 
-  reduceQuantity(){
-    
+  reduceQuantity(id){
+    this.loading = true;
+    this.apiService.decrement(id)
+    .subscribe(data=>{
+      this.getOrdersFromApi();
+    })
   }
 
 }

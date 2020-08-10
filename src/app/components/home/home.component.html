@@ -1,36 +1,40 @@
-<div>
+<div class="content_wrapper card">
+  <div>
     <nav class="navbar navbar-dark bg-secondary">
-        <button class="navbar-toggler" type="button">
+      <button class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
-        </button>
+      </button>
     </nav>
-</div>
-<!-- Main Contetn -->
-<app-loader *ngIf="loading"></app-loader>
-<div class="main_content" *ngIf="!loading">
-    <h1>Papa Jhon`s, by islam gad</h1>
-    <hr>
-    <!-- Orders Table-->
-    <div class="container">
-        <table class="table table-light">
-            <thead>
-              <tr>
-                <th scope="col">Order Items</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Smoky Pizza - small</td>
-                <td>66 EGP</td>
-                <td class="table_options">
-                  <button class="minus" (click)="reduceQuantity()">-</button>
-                  <input type="number" value="1" readonly>
-                  <button class="plus" (click)="increaseQuantity()">+</button>
-                </td>
-              </tr>
-            </tbody>
-        </table>
+  </div>
+  <!-- Main Contetn -->
+  <div class="main_content">
+    <div *ngIf="casherName && resturantTitle">
+      <h4>Papa Jhon`s, by {{ casherName }}</h4>
+      <hr>
     </div>
+    <app-loader *ngIf="loading"></app-loader>
+    <!-- Orders Table-->
+    <div class="container" *ngIf="!loading">
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <th scope="col">Order Items</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.name }}</td>
+            <td>{{ order.price }} EGP</td>
+            <td class="table_options">
+              <button class="minus" (click)="reduceQuantity(order.id)">-</button>
+              <input type="number" [value]="order.quantity" readonly>
+              <button class="plus" (click)="increaseQuantity(order.id)">+</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

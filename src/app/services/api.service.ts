@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FullData } from '../models/full-data';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +12,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getOrders(): Observable<any>{
-    const headers = new HttpHeaders()
-    .append('Content-Type', 'application/json')
-    .append('Access-Control-Allow-Headers', 'Content-Type')
-    .append('Access-Control-Allow-Methods', "GET, POST, DELETE, PUT")
-    .append('Access-Control-Allow-Origin', '*');
-    return this.http.get<any>(`http://foodie.aqarmap.net/api/orders/122`,{headers: headers})
+  getFullData(): Observable<FullData>{
+    return this.http.get<FullData>(`http://foodie.aqarmap.net/api/orders/122`)
+  }
+
+  getOrders(): Observable<Order[]>{
+    return this.http.get<FullData>(`http://foodie.aqarmap.net/api/orders/122`).pipe(
+      map(x => x.order_items)
+    )
   }
 
   increment(itemID,body): Observable<any>{
