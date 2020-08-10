@@ -27,7 +27,7 @@ export class ApiService {
   }
 
   decrement(itemID): Observable<any>{
-    return this.http.delete<any>(`http://foodie.aqarmap.net/api/orders/119/items/${itemID}?user_id=2`)
+    return this.http.delete<any>(`http://foodie.aqarmap.net/api/orders/122/items/${itemID}?user_id=2`)
   }
 
 }
